@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: socle-effyis
+  datasource:
+    url: jdbc:postgresql://localhost:5432/socle_db
+    username: postgres
+    password: postgres
+    testwhileIdle: true
+    validationQuery: SELECT 1
+    minIdle: 10
+    maxIdle: 50
+    initialSize: 10
+    maxWait: 60000
+    testOnBorrow: true
+    hikari:
+      maxLifetime: 30000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: email
+    password: password
+    sign: Effyis
+    location: Casablanca
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+ldap:
+  urls: ldap://ldap.forumsys.com:389/
+  base:
+    dn: dc=example,dc=com 
+  username: cn=read-only-admin,dc=example,dc=com
+  password: password 
+  user:
+    dn:
+      pattern: uid={0}
+            
+security:
+  public:
+    endpoint: /effyis/api/api-docs/**,/effyis/api/swagger-ui/**,/effyis/api/accounts/login
+  jwt:
+    secret: secret
+    expiration:
+      time: 2592000000
+
+springdoc:
+  swagger-ui:
+    path: /effyis/api/swagger-ui
+  api-docs:
+    path: /effyis/api/api-docs
+
+server:
+  port : 9000
+
+default:
+  role: DEFAULT
