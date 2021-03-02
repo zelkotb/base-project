@@ -1,0 +1,15 @@
+spring:
+  datasources:
+    -
+      url: jdbc:postgresql://localhost:5432/socle_db
+      username: postgres
+      password: postgres
+      client: client1
+    -
+      url: jdbc:postgresql://localhost:5432/socle_db_2
+      username: postgres
+      password: postgres
+      client: client2
+    
+    
+      

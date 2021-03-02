@@ -30,7 +30,7 @@ public class AccountController {
 
 	@PostMapping("/login")
 	@Operation(security = { @SecurityRequirement(name = "Bearer Token") })
-	public JwtDTO authenticate(@RequestBody AuthenticationDTO authenticationDTO) {
+	public JwtDTO authenticate(@RequestBody AuthenticationDTO authenticationDTO) throws Exception {
 		return this.accountService.authenticateUser(authenticationDTO);
 	}
 

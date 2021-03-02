@@ -2,6 +2,11 @@ package effyis.partners.socle.dto;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * 
+ * @author EL KOTB ZAKARIA
+ *
+ */
 public class AccountDTO extends BaseDTO {
 
 	private Long id;

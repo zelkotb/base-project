@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 /**
  * 
@@ -54,6 +55,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Value("${ldap.user.dn.pattern}")
 	private String ldapUserDnPattern;
 
+	@Autowired
+	private CorsConfigurationSource corsConfigurationSource;
+
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -73,6 +77,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
+		http.cors().configurationSource(this.corsConfigurationSource);
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests().antMatchers(this.public_endpoint).permitAll();
 		http.authorizeRequests().anyRequest().authenticated();

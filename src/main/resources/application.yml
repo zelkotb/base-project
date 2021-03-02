@@ -1,27 +1,17 @@
 spring:
   application:
     name: socle-effyis
-  datasource:
-    url: jdbc:postgresql://localhost:5432/socle_db
-    username: postgres
-    password: postgres
-    testwhileIdle: true
-    validationQuery: SELECT 1
-    minIdle: 10
-    maxIdle: 50
-    initialSize: 10
-    maxWait: 60000
-    testOnBorrow: true
-    hikari:
-      maxLifetime: 30000
   jpa:
+    open-in-view: false
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none  # Prevent Hibernate from Automatic Changes to the DDL Schema
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    initialization-mode: never  # Prevent JPA from trying to Initialize
   mail:
     host: smtp.gmail.com
     port: 587
@@ -35,6 +25,7 @@ spring:
           auth: true
           starttls:
             enable: true
+
 ldap:
   urls: ldap://ldap.forumsys.com:389/
   base:
@@ -52,6 +43,9 @@ security:
     secret: secret
     expiration:
       time: 2592000000
+  cors:
+    allowed:
+      origins: http://localhost:4200,http://127.0.0.1:4200
 
 springdoc:
   swagger-ui:
@@ -64,3 +58,26 @@ server:
 
 default:
   role: DEFAULT
+  
+config:
+  datasources:
+    -
+      url: jdbc:postgresql://localhost:5432/socle_db
+      username: postgres
+      password: postgres
+      client: client1
+    -
+      url: jdbc:postgresql://localhost:5432/socle_db
+      username: postgres
+      password: postgres
+      client: client2
+      
+
+datasource:
+  max:
+    pool:
+      size: 20
+  min:
+    idle: 10
+  idle:
+    timeout: 120000

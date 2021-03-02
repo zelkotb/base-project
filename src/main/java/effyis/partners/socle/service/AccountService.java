@@ -17,7 +17,7 @@ public interface AccountService {
 
 	Optional<Account> findByLogin(String login);
 
-	JwtDTO authenticateUser(AuthenticationDTO authenticationDTO);
+	JwtDTO authenticateUser(AuthenticationDTO authenticationDTO) throws Exception;
 
 	List<AccountDTO> getAccounts();
 
