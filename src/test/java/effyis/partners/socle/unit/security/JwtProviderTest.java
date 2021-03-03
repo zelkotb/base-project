@@ -18,7 +18,7 @@ public class JwtProviderTest {
 
 	@Test
 	public void generateJWTTest() {
-		String jwt = JWTProvider.generateJWT("zakaria", "ADMIN", "secret", 120000);
+		String jwt = JWTProvider.generateJWT("zakaria", "ADMIN", "secret", 120000, "client1");
 		Assert.assertNotNull(jwt);
 	}
 

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,6 +47,11 @@ public class AccountImplService implements AccountService {
 	@Value("${default.role}")
 	private String defaultRole;
 
+	private String keyDB = "keyDB";
+
+	@Autowired
+	private HttpServletRequest request;
+
 	@Override
 	public Optional<Account> findByLogin(String login) {
 		return this.accountRepository.findByLogin(login);
@@ -63,7 +70,10 @@ public class AccountImplService implements AccountService {
 		Account account = this.findByLogin(authenticationDTO.getLogin()).orElse(null);
 		String jwt = JWTProvider.generateJWT(authenticationDTO.getLogin(),
 				((account != null) && (account.getRole() != null)) ? account.getRole().getRole() : this.defaultRole,
-				this.secret, this.expirationTime);
+				this.secret, this.expirationTime,
+				((this.request.getHeader(this.keyDB) == null) || this.request.getHeader(this.keyDB).isEmpty())
+						? "client1"
+						: this.request.getHeader(this.keyDB));
 		JwtDTO jwtDTO = new JwtDTO();
 		jwtDTO.setJwt(jwt);
 		return jwtDTO;

@@ -12,6 +12,9 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     initialization-mode: never  # Prevent JPA from trying to Initialize
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog-master.xml
   mail:
     host: smtp.gmail.com
     port: 587

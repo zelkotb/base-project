@@ -62,7 +62,7 @@ public class JWTProvider {
 			return true;
 		} else {
 			throw new CustomAuthenticationException(
-					this.messageSource.getMessage("account.not.found", null, LocaleContextHolder.getLocale()));
+					this.messageSource.getMessage("jwt.expired", null, LocaleContextHolder.getLocale()));
 		}
 	}
 
@@ -74,11 +74,11 @@ public class JWTProvider {
 		return date.before(new Date(System.currentTimeMillis())) ? true : false;
 	}
 
-	public static String generateJWT(String login, String role, String secret, long expirationTime) {
+	public static String generateJWT(String login, String role, String secret, long expirationTime, String tenant) {
 		String jwt = Jwts.builder().setSubject(login)
 				.setExpiration(new Date(System.currentTimeMillis() + expirationTime))
 				.signWith(SignatureAlgorithm.HS512, Base64.getEncoder().encodeToString(secret.getBytes()))
-				.claim("role", role).compact();
+				.claim("role", role).claim("tenant", tenant).compact();
 		return jwt;
 	}
 

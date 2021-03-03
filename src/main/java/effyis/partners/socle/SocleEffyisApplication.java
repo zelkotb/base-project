@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,7 +26,6 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
-import effyis.partners.socle.repository.AccountRepository;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -49,20 +47,11 @@ public class SocleEffyisApplication implements CommandLineRunner {
 		SpringApplication.run(SocleEffyisApplication.class, args);
 	}
 
-	@Autowired
-	private AccountRepository accountRepository;
-	@Autowired
-	private BCryptPasswordEncoder bcrypt;
-
 	@Value("${security.cors.allowed.origins}")
 	private List<String> allowedOrigins;
 
 	@Override
 	public void run(String... args) throws Exception {
-		// Account account = new Account();
-		// account.setLogin("zakaria");// ldap user "riemann"
-		// account.setPassword(this.bcrypt.encode("password"));
-		// this.accountRepository.save(account);
 	}
 
 	@Bean

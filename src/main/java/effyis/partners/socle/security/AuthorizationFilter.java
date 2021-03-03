@@ -20,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import effyis.partners.socle.datasource.TenantStorageContext;
 import effyis.partners.socle.exception.CustomAuthenticationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -72,10 +73,11 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
 	private void authUser(String jwt) {
 		Jws<Claims> parsedJwt = JWTProvider.parseJwt(jwt, this.secret);
-		String username = (String) parsedJwt.getBody().get("login");
+		String username = parsedJwt.getBody().getSubject();
 		String role = (String) parsedJwt.getBody().get("role");
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority((role.isEmpty() || (role == null)) ? "DEFAULT" : role));
+		TenantStorageContext.setTenantId(parsedJwt.getBody().get("tenant", String.class));
 		SecurityContextHolder.getContext()
 				.setAuthentication(new UsernamePasswordAuthenticationToken(username, null, authorities));
 	}
