@@ -69,7 +69,7 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	public ExceptionDTO maxUploadSizeExceededExceptionHandler(MaxUploadSizeExceededException e) {
 		ControllerExceptionHandler.LOG.error("unxpected error has happend ", e.getCause());
-		ExceptionDTO exceptionDTO = this.initExceptionDTO(e, "Max Size Exceeded (20MB)", 400, "Bad Request");
+		ExceptionDTO exceptionDTO = this.initExceptionDTO(e, "Max Upload Size Exceeded", 400, "Bad Request");
 		return exceptionDTO;
 	}
 
