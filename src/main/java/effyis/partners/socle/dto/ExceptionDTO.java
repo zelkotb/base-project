@@ -7,6 +7,7 @@ package effyis.partners.socle.dto;
  */
 public class ExceptionDTO extends BaseDTO {
 
+	private static final long serialVersionUID = 1L;
 	private String timestamp;
 	private int status;
 	private String error;

@@ -1,4 +1,4 @@
-package effyis.partners.socle.datasource;
+package effyis.partners.socle.configuration.datasource;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package effyis.partners.socle.security;
+package effyis.partners.socle.configuration.security;
 
 import java.util.Base64;
 import java.util.Date;

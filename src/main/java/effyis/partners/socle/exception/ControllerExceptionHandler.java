@@ -89,7 +89,6 @@ public class ControllerExceptionHandler {
 		String path = (String) this.request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
 		exceptionDTO.setPath(path);
 		exceptionDTO.setMessage(message);
-
 		return exceptionDTO;
 	}
 }

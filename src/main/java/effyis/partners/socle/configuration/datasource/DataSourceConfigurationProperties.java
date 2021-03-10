@@ -1,4 +1,4 @@
-package effyis.partners.socle.datasource;
+package effyis.partners.socle.configuration.datasource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +31,22 @@ public class DataSourceConfigurationProperties {
 		super();
 	}
 
+	public DataSourceDTO findByClient(String client) {
+		for (DataSourceDTO dataSourceDTO : this.datasources) {
+			if (dataSourceDTO.getClient().equals(client)) {
+				return dataSourceDTO;
+			}
+		}
+		return null;
+	}
+
 	public static class DataSourceDTO {
 		private String url;
 		private String username;
 		private String password;
 		private String client;
+		private String changelog;
+		private boolean dropFirst;
 
 		public String getUrl() {
 			return this.url;
@@ -67,6 +78,22 @@ public class DataSourceConfigurationProperties {
 
 		public void setClient(String client) {
 			this.client = client;
+		}
+
+		public String getChangelog() {
+			return this.changelog;
+		}
+
+		public void setChangelog(String changelog) {
+			this.changelog = changelog;
+		}
+
+		public boolean isDropFirst() {
+			return this.dropFirst;
+		}
+
+		public void setDropFirst(boolean dropFirst) {
+			this.dropFirst = dropFirst;
 		}
 
 	}

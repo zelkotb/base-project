@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import effyis.partners.socle.security.JWTProvider;
+import effyis.partners.socle.configuration.security.JWTProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 

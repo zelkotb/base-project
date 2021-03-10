@@ -1,4 +1,4 @@
-package effyis.partners.socle.datasource;
+package effyis.partners.socle.configuration.datasource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Primary;
 
 import com.zaxxer.hikari.HikariDataSource;
 
-import effyis.partners.socle.datasource.DataSourceConfigurationProperties.DataSourceDTO;
-import effyis.partners.socle.exception.DataSourceNotFoundException;
+import effyis.partners.socle.configuration.datasource.DataSourceConfigurationProperties.DataSourceDTO;
 
 /**
  * 
@@ -33,16 +34,18 @@ public class DatasourceConfiguration {
 	@Value("${datasource.idle.timeout}")
 	private int idleTimeout;
 
-	@Autowired
 	@Bean(name = "dataSource")
-	public DataSource getDataSource() throws DataSourceNotFoundException {
+	@DependsOn("datasources")
+	public DataSource getDataSource(Map<Object, Object> dataSources) throws DataSourceNotFoundException {
 		MyRoutingDataSource dataSource = new MyRoutingDataSource();
-		dataSource.setTargetDataSources(this.getDataSources());
+		dataSource.setTargetDataSources(dataSources);
 		dataSource.afterPropertiesSet();
 		return dataSource;
 	}
 
-	private Map<Object, Object> getDataSources() {
+	@Bean(name = "datasources")
+	@Primary
+	public Map<Object, Object> getDataSources() {
 		Map<Object, Object> dataSources = new HashMap<Object, Object>();
 		for (DataSourceDTO datasource : this.properties.getDatasources()) {
 			HikariDataSource hkDataSource = new HikariDataSource();

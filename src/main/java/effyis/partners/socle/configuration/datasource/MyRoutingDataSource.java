@@ -1,4 +1,4 @@
-package effyis.partners.socle.datasource;
+package effyis.partners.socle.configuration.datasource;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
@@ -6,8 +6,6 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import effyis.partners.socle.exception.DataSourceNotFoundException;
 
 /**
  * 
@@ -22,13 +20,17 @@ public class MyRoutingDataSource extends AbstractRoutingDataSource {
 	@Override
 	protected Object determineCurrentLookupKey() {
 		String keyDB;
-		if (SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
+		if ((SecurityContextHolder.getContext().getAuthentication() != null)
+				&& SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
 			keyDB = this.request.getHeader("keyDB");
 			if (keyDB == null) {
 				keyDB = "client1";
 			}
 		} else {
 			keyDB = TenantStorageContext.getTenantId();
+		}
+		if (keyDB == null) {
+			keyDB = "client1";
 		}
 		return keyDB;
 	}

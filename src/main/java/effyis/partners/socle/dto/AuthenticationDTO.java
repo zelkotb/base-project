@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 public class AuthenticationDTO extends BaseDTO {
 
+	private static final long serialVersionUID = 1L;
 	@NotNull
 	@Size(min = 10, max = 50)
 	@Schema(description = "the login of the user in db or ldap")

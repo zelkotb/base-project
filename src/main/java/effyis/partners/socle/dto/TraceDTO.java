@@ -20,11 +20,11 @@ public class TraceDTO {
 	@Override
 	public String toString() {
 		StringBuilder audit = new StringBuilder(",\n  { methodName : ");
-		audit.append(this.methodName).toString();
+		audit.append(this.methodName).append(",\n  input: ").toString();
 		for (String i : this.input) {
-			audit.append(",\n  ").append(i);
+			audit.append(i).append(",\n  ");
 		}
-		return audit.append(",\n  output: ").append(this.output).append(" }").toString();
+		return audit.append(",\n output: ").append(this.output).append(" }").toString();
 	}
 
 	public String getMethodName() {

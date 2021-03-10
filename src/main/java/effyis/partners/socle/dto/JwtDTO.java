@@ -7,6 +7,7 @@ package effyis.partners.socle.dto;
  */
 public class JwtDTO extends BaseDTO {
 
+	private static final long serialVersionUID = 1L;
 	private String jwt;
 
 	public JwtDTO() {

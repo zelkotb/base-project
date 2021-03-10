@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -22,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "account")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Account {
 
 	@Id
@@ -40,8 +37,8 @@ public class Account {
 
 	@Override
 	public String toString() {
-		StringBuilder student = new StringBuilder("{ login : ");
-		return student.append(this.login).append(", password : ").append(this.password).append(" }").toString();
+		StringBuilder account = new StringBuilder("{ login : ");
+		return account.append(this.login).append(", password : ").append(this.password).append(" }").toString();
 	}
 
 	public Long getId() {

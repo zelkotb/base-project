@@ -21,8 +21,8 @@ public class Role {
 
 	@Override
 	public String toString() {
-		StringBuilder student = new StringBuilder("{role : ");
-		return student.append(this.role).append(" }").toString();
+		StringBuilder role = new StringBuilder("{role : ");
+		return role.append(this.role).append(" }").toString();
 	}
 
 	public Role() {

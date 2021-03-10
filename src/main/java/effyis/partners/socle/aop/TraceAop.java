@@ -25,7 +25,7 @@ public class TraceAop {
 
 	private Logger LOGGER = LoggerFactory.getLogger(TraceAop.class);
 
-	@AfterReturning(pointcut = "execution(* effyis.partners.socle.controller.*.*(..))", returning = "result")
+	@AfterReturning(pointcut = "execution(* effyis.partners.*.controller.*.*(..))", returning = "result")
 	@Async
 	public void getControllerTrace(JoinPoint joinpoint, Object result) {
 		String methodName = joinpoint.getSignature().getName();
@@ -34,7 +34,9 @@ public class TraceAop {
 		TraceDTO traceDTO = new TraceDTO();
 		traceDTO.setInput(input);
 		traceDTO.setMethodName(methodName);
-		traceDTO.setOutput(result.toString());
+		if (result != null) {
+			traceDTO.setOutput(result.toString());
+		}
 		this.LOGGER.info(traceDTO.toString());
 	}
 }

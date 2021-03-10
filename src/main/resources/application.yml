@@ -1,20 +1,18 @@
 spring:
   application:
     name: socle-effyis
+  liquibase: 
+    enabled: true
   jpa:
     open-in-view: false
     show-sql: true
     hibernate:
       ddl-auto: none  # Prevent Hibernate from Automatic Changes to the DDL Schema
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     initialization-mode: never  # Prevent JPA from trying to Initialize
-  liquibase:
-    enabled: true
-    change-log: classpath:db/changelog/changelog-master.xml
   mail:
     host: smtp.gmail.com
     port: 587
@@ -49,6 +47,10 @@ security:
   cors:
     allowed:
       origins: http://localhost:4200,http://127.0.0.1:4200
+      methods: HEAD,GET,POST,PUT,DELETE,PATCH
+      headers: Accept,Origin,Content-Type,Depth,User-Agent,If-Modified-Since,Cache-Control,Authorization,X-Req,X-File-Size,X-Requested-With,X-File-Name
+      
+      
 
 springdoc:
   swagger-ui:
@@ -57,7 +59,7 @@ springdoc:
     path: /effyis/api/api-docs
 
 server:
-  port : 9000
+  port : 9001
 
 default:
   role: DEFAULT
@@ -65,17 +67,20 @@ default:
 config:
   datasources:
     -
-      url: jdbc:postgresql://localhost:5432/socle_db
+      url: jdbc:postgresql://localhost:5432/client1
       username: postgres
       password: postgres
       client: client1
+      changelog: classpath:/db/changelog/changelog-master_client1.xml
+      dropFirst: true
     -
-      url: jdbc:postgresql://localhost:5432/socle_db
+      url: jdbc:postgresql://localhost:5432/client2
       username: postgres
       password: postgres
       client: client2
+      changelog: classpath:/db/changelog/changelog-master_client2.xml
+      dropFirst: true
       
-
 datasource:
   max:
     pool:

@@ -1,4 +1,4 @@
-package effyis.partners.socle.security;
+package effyis.partners.socle.configuration.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import effyis.partners.socle.datasource.TenantStorageContext;
+import effyis.partners.socle.configuration.datasource.TenantStorageContext;
 import effyis.partners.socle.exception.CustomAuthenticationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

@@ -1,4 +1,4 @@
-package effyis.partners.socle.security;
+package effyis.partners.socle.configuration.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

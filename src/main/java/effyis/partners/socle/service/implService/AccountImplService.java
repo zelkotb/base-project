@@ -13,12 +13,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import effyis.partners.socle.configuration.security.JWTProvider;
 import effyis.partners.socle.dto.AccountDTO;
 import effyis.partners.socle.dto.AuthenticationDTO;
 import effyis.partners.socle.dto.JwtDTO;
 import effyis.partners.socle.entity.Account;
 import effyis.partners.socle.repository.AccountRepository;
-import effyis.partners.socle.security.JWTProvider;
 import effyis.partners.socle.service.AccountService;
 
 /**
